@@ -8,7 +8,12 @@ As coleções foram organizadas por domínio funcional, com ambiente configuráv
 ## 📁 Estrutura do Projeto
 
 ```shell
-Api-Post/ 
+Api-Post/
+├── Bugs/             
+│   └── bug-001.png
+│   └── readmeBugs.md
+├── PlanoDeTeste/             
+│   └── readmePlanoDeTeste.md
 ├── collection/             
 │   └── Api - Posts.postman_collection.json   
 ├── environment/            
