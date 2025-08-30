@@ -9,11 +9,6 @@ As coleções foram organizadas por domínio funcional, com ambiente configuráv
 
 ```shell
 Api-Post/
-├── Bugs/             
-│   └── bug-001.png
-│   └── readmeBugs.md
-├── PlanoDeTeste/             
-│   └── readmePlanoDeTeste.md
 ├── collection/             
 │   └── Api - Posts.postman_collection.json   
 ├── environment/            
@@ -53,6 +48,18 @@ Para carregar o ambiente no Postman:
 1. Vá até **Environments > Import**
 2. Selecione o arquivo `Api-post-environment.postman_environment.json`
 3. Ative o ambiente desejado no canto superior direito da interface
+# 🧪 Suite de Testes: Posts API
+
+## 📌 Casos de Teste
+
+| ID      | Título                     | Descrição                                         | Resultado Esperado |
+|---------|----------------------------|---------------------------------------------------|--------------------|
+| CT-001  | Listar todos os posts      | Validar que a API retorna a lista de posts        | Retorna **100 posts em JSON** com **status 200** |
+| CT-002  | Obter post por ID válido   | Validar que a API retorna um post existente       | Retorna o **post correspondente** com **status 200** |
+| CT-003  | Obter post inexistente     | Validar que a API não retorna post inválido       | Retorna **Not Found** com **status 404** |
+| CT-004  | Criar um post válido       | Validar que a API cria um novo post               | Retorna **post criado com ID** com **status 201** |
+| CT-005  | Alterar post por ID válido | Validar que a API atualiza corretamente um post   | Retorna **dados alterados** com **status 200** |
+| CT-006  | Deletar post por ID válido | Validar que a API deleta corretamente um post     | Retorna **sem conteúdo** com **status 204** |
 
 ## 🧪 Executando os Testes Manualmente
 
