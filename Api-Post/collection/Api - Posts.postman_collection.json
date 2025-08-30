@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "bdabb6e5-3530-4211-9202-1fd1af5d74d8",
+		"name": "Api - Posts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47538330",
+		"_collection_link": "https://romulosergiore-9797399.postman.co/workspace/Romulo-Evangelista's-Workspace~e366a463-04c2-4efc-8975-287730a20b0b/collection/47538330-bdabb6e5-3530-4211-9202-1fd1af5d74d8?action=share&source=collection_link&creator=47538330"
+	},
+	"item": [
+		{
+			"name": "Posts - List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    const res = pm.response;",
+							"    pm.expect(res.code).to.eql(200);",
+							"    pm.expect(res.status).to.include(\"OK\");",
+							"});",
+							"",
+							"pm.test('Verificar se o Array com os posts não está vazio', function () {",
+							"    const resBody = pm.response.json();",
+							"    console.log(resBody);",
+							"    pm.expect(resBody).to.not.be.empty;",
+							"    pm.expect(resBody).to.have.length(100);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/posts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts - List by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    const res = pm.response;",
+							"    pm.expect(res.code).to.eql(200);",
+							"    pm.expect(res.status).to.include(\"OK\");",
+							"});",
+							"pm.test(\"Verificar se o titulo do post é 'qui est esse'\", function () {",
+							"    const res = pm.response.json();",
+							"    pm.expect(res.title).to.eql(\"qui est esse\"); ",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/posts/2",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts - List by invalid ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    const res = pm.response;",
+							"    pm.expect(res.code).to.eql(404);",
+							"    pm.expect(res.status).to.include(\"Not Found\");",
+							"});",
+							"",
+							"pm.test(\"Verificar se o retona um objeto vazio com o ID invalido\", function () {",
+							"    const res = pm.response.json();",
+							"    pm.expect(res).to.eql({}); ",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/posts/9999",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts - Create post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    const res = pm.response;",
+							"    pm.expect(res.code).to.eql(201);",
+							"    pm.expect(res.status).to.include(\"Created\");",
+							"});",
+							"",
+							"pm.test('Verificar se o TITLE e BODY estão corretos', function () {",
+							"    const res = pm.response.json();",
+							"    pm.expect(res.title).to.eql(\"testando API\");",
+							"    pm.expect(res.body).to.eql(\"body do teste de api\");",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test('Verificar se o TITLE e BODY não ta vazio', function () {",
+							"    const reqBody = pm.request.body.raw;",
+							"    const req = JSON.parse(reqBody);",
+							"    pm.expect(req.title).to.not.empty;",
+							"    pm.expect(req.body).to.not.empty;",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"title\": \"testando API\",\n \"body\": \"body do teste de api\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts - Update post by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    const res = pm.response;",
+							"    pm.expect(res.code).to.eql(200);",
+							"    pm.expect(res.status).to.include(\"OK\");",
+							"});",
+							"",
+							"pm.test('Verificar se o TITLE e BODY estão corretos', function () {",
+							"    const res = pm.response.json();",
+							"    pm.expect(res.title).to.eql(\"teste update api\");",
+							"    pm.expect(res.id).to.eql(24);",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"teste update api\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts/24",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - Delete post by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    const res = pm.response;",
+							"    pm.expect(res.code).to.eql(200);",
+							"    pm.expect(res.status).to.include(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"Verificar se o retona um objeto vazio com o ID invalido\", function () {",
+							"    const res = pm.response.json();",
+							"    pm.expect(res).to.empty; ",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
