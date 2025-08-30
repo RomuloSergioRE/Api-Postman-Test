@@ -58,8 +58,8 @@ Para carregar o ambiente no Postman:
 | CT-002  | Obter post por ID válido   | Validar que a API retorna um post existente       | Retorna o **post correspondente** com **status 200** |
 | CT-003  | Obter post inexistente     | Validar que a API não retorna post inválido       | Retorna **Not Found** com **status 404** |
 | CT-004  | Criar um post válido       | Validar que a API cria um novo post               | Retorna **post criado com ID** com **status 201** |
-| CT-005  | Alterar post por ID válido | Validar que a API atualiza corretamente um post   | Retorna **dados alterados** com **status 200** |
-| CT-006  | Deletar post por ID válido | Validar que a API deleta corretamente um post     | Retorna **sem conteúdo** com **status 204** |
+| CT-005  | Alterar post por ID        | Validar que a API atualiza corretamente um post   | Retorna **dados alterados** com **status 200** |
+| CT-006  | Deletar post por ID        | Validar que a API deleta corretamente um post     | Retorna **sem conteúdo** com **status 204** |
 
 ## 🧪 Executando os Testes Manualmente
 
